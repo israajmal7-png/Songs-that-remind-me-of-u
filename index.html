@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>for you ♡</title>
-
   <style>
     body {
       margin: 0;
@@ -30,10 +29,7 @@
       to { transform: translateY(-10vh); opacity: 0; }
     }
 
-    .container {
-      text-align: center;
-      z-index: 2;
-    }
+    .container { text-align: center; z-index:2; }
 
     .start-btn {
       background: #f7c6d0;
@@ -47,9 +43,7 @@
       transition: transform 0.2s;
     }
 
-    .start-btn:hover {
-      transform: scale(1.05);
-    }
+    .start-btn:hover { transform: scale(1.05); }
 
     .player {
       display: none;
@@ -66,27 +60,24 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    h2 {
-      margin-bottom: 15px;
-      font-weight: normal;
-    }
+    h2 { margin-bottom: 15px; font-weight: normal; }
 
     .album {
       width: 100%;
-      border-radius: 18px;
+      border-radius: 50%;
       margin-bottom: 15px;
+      transition: transform 0.5s linear;
     }
 
-    .song-title {
-      font-size: 18px;
-      font-weight: bold;
+    .spinning { animation: spin 5s linear infinite; }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    .artist {
-      font-size: 14px;
-      opacity: 0.7;
-      margin-bottom: 15px;
-    }
+    .song-title { font-size: 18px; font-weight: bold; }
+    .artist { font-size: 14px; opacity: 0.7; margin-bottom: 15px; }
 
     .controls {
       display: flex;
@@ -107,15 +98,15 @@
       transition: transform 0.2s;
     }
 
-    .controls button:hover {
-      transform: scale(1.1);
-    }
+    .controls button:hover { transform: scale(1.1); }
+
+    /* pulsing hearts on play */
+    .pulse { animation: pulse 1s infinite alternate; }
+    @keyframes pulse { transform: scale(1.05); }
   </style>
 </head>
-
 <body>
 
-<!-- floating hearts -->
 <script>
   for (let i = 0; i < 20; i++) {
     const heart = document.createElement("div");
@@ -151,22 +142,15 @@
 
 <script>
   const songs = [
-    {
-      title: "Song Name Here",
-      artist: "Artist Name",
-      cover: "https://i.pinimg.com/736x/7e/52/26/7e5226222b95626d23fd1a2c630ad52b.jpg",
-      file: "song1.mp3"
-    },
-    {
-      title: "Another Song",
-      artist: "Artist Name",
-      cover: "album2.jpg",
-      file: "song2.mp3"
-    }
+    {title: "Song 1", artist: "Artist 1", cover: "https://i.pinimg.com/736x/7e/52/26/7e5226222b95626d23fd1a2c630ad52b.jpg", file: "song1.mp3"},
+    {title: "Song 2", artist: "Artist 2", cover: "album2.jpg", file: "song2.mp3"},
+    {title: "Song 3", artist: "Artist 3", cover: "album3.jpg", file: "song3.mp3"},
+    {title: "Song 4", artist: "Artist 4", cover: "album4.jpg", file: "song4.mp3"},
+    {title: "Song 5", artist: "Artist 5", cover: "album5.jpg", file: "song5.mp3"},
+    {title: "Song 6", artist: "Artist 6", cover: "album6.jpg", file: "song6.mp3"}
   ];
 
   let currentSong = 0;
-
   const startBtn = document.getElementById("startBtn");
   const player = document.getElementById("player");
   const songTitle = document.getElementById("songTitle");
@@ -181,14 +165,17 @@
   };
 
   function loadSong() {
-    songTitle.textContent = songs[currentSong].title;
-    artist.textContent = songs[currentSong].artist;
-    albumCover.src = songs[currentSong].cover;
-    audio.src = songs[currentSong].file;
+    const song = songs[currentSong];
+    songTitle.textContent = song.title;
+    artist.textContent = song.artist;
+    albumCover.src = song.cover;
+    audio.src = song.file;
+    albumCover.classList.remove("spinning");
   }
 
   function playSong() {
     audio.play();
+    albumCover.classList.add("spinning", "pulse");
   }
 
   function nextSong() {
@@ -196,13 +183,13 @@
     if (currentSong >= songs.length) {
       player.innerHTML = `
         <h2>happy valentine’s day ♡</h2>
-        <p>every song here is a piece of my heart.<br>
-        i wish i was listening with you.</p>
+        <p>every song here is a piece of my heart.<br>i wish i was listening with you.</p>
       `;
       return;
     }
     loadSong();
     audio.play();
+    albumCover.classList.add("spinning", "pulse");
   }
 </script>
 
