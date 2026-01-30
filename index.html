@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ♡</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #f6efe9;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #3b2f2f;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    button {
+      background: #d8b4a0;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 20px;
+      color: #3b2f2f;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .player {
+      display: none;
+      background: #fffaf5;
+      padding: 25px;
+      border-radius: 20px;
+      width: 300px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(40px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .song-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .artist {
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 15px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <button id="startBtn">click me ♡</button>
+
+  <div class="player" id="player">
+    <p id="introText">Are you ready to listen to the songs that remind me of you?</p>
+    <img id="albumCover" src="">
+    <div class="song-title" id="songTitle"></div>
+    <div class="artist" id="artist"></div>
+
+    <audio id="audio"></audio>
+
+    <div class="controls">
+      <button onclick="playSong()">▶ play</button>
+      <button onclick="nextSong()">skip ⏭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const songs = [
+    {
+      title: "I know you",
+      artist: "Faye Webster",
+      cover: "https://i.pinimg.com/736x/7e/52/26/7e5226222b95626d23fd1a2c630ad52b.jpg",
+      file: "iknowyou.mp3"
+    },
+    {
+      title: "Pretty boy",
+      artist: "The Neighbourhood",
+      cover: "https://i.scdn.co/image/ab67616d0000b27354fa8ed109151d0443dc8246",
+      file: "prettyboy.mp3"
+    }
+  ];
+
+  let currentSong = 0;
+
+  const startBtn = document.getElementById("startBtn");
+  const player = document.getElementById("player");
+  const songTitle = document.getElementById("songTitle");
+  const artist = document.getElementById("artist");
+  const albumCover = document.getElementById("albumCover");
+  const audio = document.getElementById("audio");
+
+  startBtn.onclick = () => {
+    startBtn.style.display = "none";
+    player.style.display = "block";
+    loadSong();
+  };
+
+  function loadSong() {
+    songTitle.textContent = songs[currentSong].title;
+    artist.textContent = songs[currentSong].artist;
+    albumCover.src = songs[currentSong].cover;
+    audio.src = songs[currentSong].file;
+  }
+
+  function playSong() {
+    audio.play();
+  }
+
+  function nextSong() {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong();
+    audio.play();
+  }
+</script>
+
+</body>
+</html>
