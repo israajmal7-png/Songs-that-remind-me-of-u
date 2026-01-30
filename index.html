@@ -17,14 +17,14 @@ body {
   position: relative;
 }
 
-/* floating hearts */
+/* floating hearts - bigger and more visible */
 .heart {
   position: absolute;
-  color: rgba(255, 182, 193, 0.7);
-  font-size: 22px;
+  color: rgba(255, 100, 180, 0.9); /* brighter pink */
+  font-size: 28px; /* bigger hearts */
   z-index: 1;
   pointer-events: none;
-  animation: float 8s linear infinite;
+  animation: float 6s linear infinite;
 }
 
 @keyframes float {
@@ -53,7 +53,7 @@ body {
   background: #fff6fb;
   padding: 25px;
   border-radius: 25px;
-  width: 320px;
+  width: 340px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.12);
   animation: slideIn 0.6s ease;
 }
@@ -70,23 +70,14 @@ h2 { margin-bottom: 15px; font-weight: normal; }
   border-radius: 50%;
   margin-bottom: 15px;
   transition: transform 0.5s linear;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 30px rgba(255,182,193,0.3); /* soft pink glow */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 30px rgba(255,182,193,0.4);
 }
 
-.spinning {
-  animation: spin 8s linear infinite; /* slower vinyl spin */
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+.spinning { animation: spin 8s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .pulse { animation: pulse 1s infinite alternate; }
-
-@keyframes pulse {
-  transform: scale(1.05);
-}
+@keyframes pulse { transform: scale(1.05); }
 
 .song-title { font-size: 18px; font-weight: bold; }
 .artist { font-size: 14px; opacity: 0.7; margin-bottom: 15px; }
@@ -111,13 +102,13 @@ audio { width: 100%; margin-top: 10px; border-radius: 10px; }
 <body>
 
 <script>
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 30; i++) { // more hearts
   const heart = document.createElement("div");
   heart.className = "heart";
   heart.innerHTML = "♡";
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.top = Math.random() * 100 + "vh";
-  heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
   document.body.appendChild(heart);
 }
 </script>
@@ -143,12 +134,12 @@ for (let i = 0; i < 20; i++) {
 
 <script>
 const songs = [
-  {title: "I know you", artist: "Faye Webster", cover: "https://i.pinimg.com/736x/7e/52/26/7e5226222b95626d23fd1a2c630ad52b.jpg", file: "https://drive.google.com/uc?export=download&id=1NAeW5_CXVs9GAe7SIJDNB38Xo2kEttZ5"},
-  {title: "Song 2", artist: "Artist 2", cover: "album2.jpg", file: "song2.mp3"},
-  {title: "Song 3", artist: "Artist 3", cover: "album3.jpg", file: "song3.mp3"},
-  {title: "Song 4", artist: "Artist 4", cover: "album4.jpg", file: "song4.mp3"},
-  {title: "Song 5", artist: "Artist 5", cover: "album5.jpg", file: "song5.mp3"},
-  {title: "Song 6", artist: "Artist 6", cover: "album6.jpg", file: "song6.mp3"}
+  {title: "Always", artist: "Artist 1", cover: "album1.jpg", file: "DIRECT_LINK_FOR_ALWAYS"},
+  {title: "I Know You", artist: "Faye Webster", cover: "https://i.pinimg.com/736x/7e/52/26/7e5226222b95626d23fd1a2c630ad52b.jpg", file: "https://dl.dropboxusercontent.com/s/tvm3498hel4528iv7no6k/iknowyou.mp3.mp3"},
+  {title: "Pretty Boy", artist: "Artist 3", cover: "album3.jpg", file: "DIRECT_LINK_FOR_PRETTYBOY"},
+  {title: "Song 4", artist: "Artist 4", cover: "album4.jpg", file: "DIRECT_LINK_SONG4"},
+  {title: "Song 5", artist: "Artist 5", cover: "album5.jpg", file: "DIRECT_LINK_SONG5"},
+  {title: "Song 6", artist: "Artist 6", cover: "album6.jpg", file: "DIRECT_LINK_SONG6"}
 ];
 
 let currentSong = 0;
